@@ -8,6 +8,7 @@ import {
 
 import About from './components/About'
 import Contact from './components/Contact'
+import Home from './components/Home'
 import './App.css';
 
 class App extends Component {
@@ -17,40 +18,29 @@ class App extends Component {
     this.state = {
       baskets: []
     }
-  } 
+  }
 
   render() {
     return (
-      <div className="App">
-        <Router>
-          <ul>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/about'>About</Link></li>
-            <li><Link to='/contact'>Contact</Link></li>
-          </ul>
-
-          <Switch>
-            <Route path='/about'>
-              <About />
-            </Route>
-            <Route path='/contact'>
-              <Contact />
-            </Route>
-          </Switch>
-
-        </Router>
-
-        <h1>Welcome to the SDI CSA [virtual]</h1>
-        <p>please select a basket</p>
+      <Router>
         <ul>
-        {
-          this.state.baskets.length > 0 ?
-          this.state.baskets.map(basket => <li>{ basket.name }</li>)
-          :
-          <p>Due to high demand, we do not have any baskets to offer at this time.</p>
-        }
+          <li><Link to='/'>Home</Link></li>
+          <li><Link to='/about'>About</Link></li>
+          <li><Link to='/contact'>Contact</Link></li>
         </ul>
-      </div>
+
+        <Switch>
+          <Route exact path='/'>
+            <Home baskets={this.state.baskets} />
+          </Route>
+          <Route path='/about'>
+            <About />
+          </Route>
+          <Route path='/contact'>
+            <Contact />
+          </Route>
+        </Switch>
+      </Router>
     );
   }
 
